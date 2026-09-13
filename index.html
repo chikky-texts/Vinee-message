@@ -4,452 +4,651 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Dear Santa Claus</title>
+<title>To My Dear Santa Claus 🤍</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #f8eef3;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(183, 94, 130, 0.20), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(126, 78, 110, 0.20), transparent 30%),
+        linear-gradient(135deg, #120b15, #21121f, #100b14);
+    overflow-x: hidden;
+}
+
+/* Stars */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,210,230,.6) 1px, transparent 1px);
+    background-size: 90px 90px, 140px 140px;
+    background-position: 10px 20px, 50px 70px;
+    opacity: .35;
+    animation: stars 12s linear infinite;
+}
+
+@keyframes stars {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-40px);
+    }
+}
+
+/* Floating glow */
+
+.glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(190, 80, 130, .12);
+    filter: blur(60px);
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* Pages */
+
+.page {
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 18px;
+    position: relative;
+}
+
+.page.active {
+    display: flex;
+}
+
+/* Letter */
+
+.card {
+    width: 100%;
+    max-width: 760px;
+    padding: 48px 38px;
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.045)
+        );
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    line-height: 1.9;
+
+    animation: letterIn 1s ease;
+}
+
+@keyframes letterIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.97);
     }
 
-    body {
-        margin: 0;
-        font-family: Georgia, serif;
-        background: linear-gradient(135deg, #fff1f5, #fce4ec);
-        color: #3d3035;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
+}
+
+/* Headings */
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0 0 35px;
+
+    color: #fff5f8;
+
+    text-shadow:
+        0 0 15px rgba(255,170,205,.35);
+}
+
+h2 {
+    color: #f0b6cd;
+    font-weight: normal;
+    text-shadow: 0 0 12px rgba(240,182,205,.25);
+}
+
+p {
+    font-size: 17px;
+    color: #eadde3;
+    margin: 20px 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.highlight {
+    color: #f2b5cc;
+    font-weight: bold;
+}
+
+/* Special quote */
+
+.quote {
+    text-align: center;
+    margin: 35px 0;
+    padding: 22px;
+    border-left: 2px solid #c8759a;
+    border-right: 2px solid #c8759a;
+    color: #ffe9f1;
+    font-style: italic;
+}
+
+/* Button */
+
+.next-btn {
+    display: block;
+    margin: 38px auto 0;
+
+    padding: 13px 32px;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 30px;
+
+    background: rgba(205, 103, 145, .25);
+    color: #fff;
+
+    font-family: Georgia, serif;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.next-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    background: rgba(205, 103, 145, .45);
+    box-shadow: 0 10px 30px rgba(205,103,145,.25);
+}
+
+/* Music button */
+
+.music-btn {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 20;
+
+    padding: 10px 16px;
+    border-radius: 25px;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    background: rgba(20,10,20,.65);
+    color: white;
+
+    backdrop-filter: blur(10px);
+
+    cursor: pointer;
+    font-family: Georgia, serif;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
+}
+
+/* Signature */
+
+.signature {
+    text-align: center;
+    margin-top: 55px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,.12);
+}
+
+.signature h2 {
+    font-size: 22px;
+}
+
+.signature b {
+    color: #f6dce7;
+    letter-spacing: 1px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
 
     .page {
-        min-height: 100vh;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        padding: 30px 18px;
-    }
-
-    .page.active {
-        display: flex;
+        padding: 30px 14px;
     }
 
     .card {
-        width: 100%;
-        max-width: 750px;
-        background: rgba(255,255,255,0.92);
-        padding: 40px 30px;
-        border-radius: 25px;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.12);
-        line-height: 1.8;
-        animation: fadeIn 1s ease;
+        padding: 32px 22px;
+        border-radius: 22px;
     }
 
     h1 {
-        text-align: center;
-        font-size: 32px;
-        margin-bottom: 30px;
-    }
-
-    h2 {
-        color: #a94d70;
-        margin-top: 25px;
+        font-size: 27px;
     }
 
     p {
-        font-size: 17px;
-    }
-
-    .center {
-        text-align: center;
-    }
-
-    .highlight {
-        font-weight: bold;
-        color: #a94d70;
-    }
-
-    .next-btn {
-        display: block;
-        margin: 30px auto 0;
-        padding: 12px 28px;
-        border: none;
-        border-radius: 25px;
-        background: #a94d70;
-        color: white;
         font-size: 16px;
-        cursor: pointer;
+        line-height: 1.85;
     }
 
-    .next-btn:hover {
-        transform: scale(1.05);
+    .music-btn {
+        top: 12px;
+        right: 12px;
+        font-size: 13px;
     }
-
-    .signature {
-        text-align: center;
-        margin-top: 40px;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 600px) {
-        .card {
-            padding: 28px 20px;
-        }
-
-        h1 {
-            font-size: 27px;
-        }
-
-        p {
-            font-size: 16px;
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
+<div class="glow"></div>
+
+<!-- MUSIC BUTTON -->
+<button class="music-btn" onclick="toggleMusic()">
+    🎵 Play Music
+</button>
+
+<!--
+IMPORTANT:
+Later we will upload your song as "song.mp3"
+and then this will play it.
+-->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+
 <!-- PAGE 1 -->
+
 <section class="page active" id="page1">
-    <div class="card">
 
-        <h1>To, My Dear Santa Claus 🎅🏻</h1>
+<div class="card">
 
-        <p class="center">
-            First time ila edaina create chesthunna…<br>
-            so, mistakes emaina unte just ignore them. :)
-        </p>
+<h1>To, My Dear Santa Claus 🎅🏻</h1>
 
-        <p>
-            Chinnappudu anukuney vallam kadha…
-            <span class="highlight">wait chesthe Santa vachi gifts isthadu</span>
-            ani.
-        </p>
+<p class="center">
+First time ila edaina create chesthunna…<br>
+so, mistakes emaina unte just ignore them. :)
+</p>
 
-        <p>
-            Ippudu ardham avuthundi…
-            <span class="highlight">
-            real Santa ante gifts techhevaadu kaadu,
-            mana life ni change chesevaadu.</span>
-        </p>
+<p>
+Chinnappudu anukuney vallam kadha…
+<span class="highlight">wait chesthe Santa vachi gifts isthadu</span>
+ani.
+</p>
 
-        <p class="center">
-            Naaku alanti Santa <span class="highlight">meeru. 🤍</span>
-        </p>
+<p>
+Ippudu ardham avuthundi…
+<span class="highlight">
+real Santa ante gifts techhevaadu kaadu,
+mana life ni change chesevaadu.
+</span>
+</p>
 
-        <p class="center">
-            Meku two things cheppali anukuntunna —
-            <br><br>
-            <b>Okati naa gurinchi,</b><br>
-            <b>inkokati mee gurinchi.</b>
-        </p>
+<div class="quote">
+Naaku alanti Santa <b>meeru. 🤍</b>
+</div>
 
-        <button class="next-btn" onclick="nextPage(2)">
-            Next →
-        </button>
+<p class="center">
+Meku two things cheppali anukuntunna —
+<br><br>
+<b>Okati naa gurinchi,</b><br>
+<b>inkokati mee gurinchi.</b>
+</p>
 
-    </div>
+<button class="next-btn" onclick="nextPage(2)">
+Next →
+</button>
+
+</div>
 </section>
 
 
 <!-- PAGE 2 -->
+
 <section class="page" id="page2">
-    <div class="card">
 
-        <h1>Naa gurinchi…</h1>
+<div class="card">
 
-        <p>
-            Nenu chala emotional person.
-        </p>
+<h1>Naa gurinchi…</h1>
 
-        <p>
-            Bayata chala mandiki naa gurinchi ekkuva teliyadu…
-            kaani lopala chala baadha, chala fights untayi.
-        </p>
+<p>
+Nenu chala emotional person.
+</p>
 
-        <p>
-            Nenu oka decent, well-cultured family nunchi vachanu.
-            So, I don't easily trust or talk to strangers.
-        </p>
+<p>
+Bayata chala mandiki naa gurinchi ekkuva teliyadu…
+kaani lopala chala baadha, chala fights untayi.
+</p>
 
-        <p>
-            Na exam clear ayina roju…
-            naa life complete ga change ayindhi.
-        </p>
+<p>
+Nenu oka decent, well-cultured family nunchi vachanu.
+So, I don't easily trust or talk to strangers.
+</p>
 
-        <p>
-            Na exam rasindhi meeru kaadu ani naaku telusu.
-            Kaani aa exam clear avvadam valla na life lo vachina change ki
-            <span class="highlight">meeru oka important reason.</span>
-        </p>
+<p>
+Na exam clear ayina roju…
+naa life complete ga change ayindhi.
+</p>
 
-        <p>
-            Aa roju varaku nenu chala low phase lo unna.
-        </p>
+<p>
+Na exam rasindhi meeru kaadu ani naaku telusu.
+Kaani aa exam clear avvadam valla na life lo vachina change ki
+<span class="highlight">meeru oka important reason.</span>
+</p>
 
-        <p>
-            Overthink chesthu…<br>
-            evariki cheppaleka…<br>
-            matladalante bayam…<br>
-            cheppakapothe baadha.
-        </p>
+<p>
+Aa roju varaku nenu chala low phase lo unna.
+</p>
 
-        <p>
-            Aa downfall nunchi…
-            <span class="highlight">
-            ee stage varaku nannu teesukoni vachindhi meeru.</span>
-        </p>
+<p>
+Overthink chesthu…<br>
+evariki cheppaleka…<br>
+matladalante bayam…<br>
+cheppakapothe baadha.
+</p>
 
-        <button class="next-btn" onclick="nextPage(3)">
-            Next →
-        </button>
+<p>
+Aa downfall nunchi…
+<span class="highlight">
+ee stage varaku nannu teesukoni vachindhi meeru.
+</span>
+</p>
 
-    </div>
+<button class="next-btn" onclick="nextPage(3)">
+Next →
+</button>
+
+</div>
 </section>
 
 
 <!-- PAGE 3 -->
+
 <section class="page" id="page3">
-    <div class="card">
 
-        <h1>Mee gurinchi…</h1>
+<div class="card">
 
-        <p>
-            Meeru eppudu oka <b>hardworker.</b>
-        </p>
+<h1>Mee gurinchi…</h1>
 
-        <p>
-            Oka guide la…
-            kaani antha kante ekkuva,
-            <span class="highlight">oka trusted person la…</span>
-            <span class="highlight">oka close person la</span> maaripoyaru.
-        </p>
+<p>
+Meeru eppudu oka <b>hardworker.</b>
+</p>
 
-        <p>
-            Nenu meetho matladina prathi sari…
-            koncham koncham naa overthinking nunchi bayataki vastunna feeling untundi.
-        </p>
+<p>
+Oka guide la…
+kaani antha kante ekkuva,
+<span class="highlight">oka trusted person la…</span>
+<span class="highlight">oka close person la</span> maaripoyaru.
+</p>
 
-        <p>
-            Mee notification…
-            mee oka message kuda…
-            automatic ga na face meeda smile techhesthundi.
-        </p>
+<p>
+Nenu meetho matladina prathi sari…
+koncham koncham naa overthinking nunchi bayataki vastunna feeling untundi.
+</p>
 
-        <p>
-            Nenu overthink chesthunna time lo kuda…
-            meeku teliyakunda…
-            enduko koncham sepu smile chesthunta.
-        </p>
+<p>
+Mee notification…
+mee oka message kuda…
+automatic ga na face meeda smile techhesthundi.
+</p>
 
-        <p>
-            Maybe meeru notice cheyyakapovachu…
-            but <span class="highlight">it matters to me.</span>
-        </p>
+<p>
+Nenu overthink chesthunna time lo kuda…
+meeku teliyakunda…
+enduko koncham sepu smile chesthunta.
+</p>
 
-        <p>
-            Nenu prathi decision ki chala times think chestha.
-            Kaani meeru naa life loki enter ayaka…
-            <span class="highlight">
-            meeku matram naa feelings ni open ga cheppagalige level ki vachanu.</span>
-        </p>
+<p>
+Maybe meeru notice cheyyakapovachu…
+but <span class="highlight">it matters to me.</span>
+</p>
 
-        <p class="center">
-            And honestly…<br><br>
-            <span class="highlight">adhe naaku chala pedda change.</span>
-        </p>
+<p>
+Nenu prathi decision ki chala times think chestha.
+Kaani meeru naa life loki enter ayaka…
+<span class="highlight">
+meeku matram naa feelings ni open ga cheppagalige level ki vachanu.
+</span>
+</p>
 
-        <button class="next-btn" onclick="nextPage(4)">
-            Next →
-        </button>
+<div class="quote">
+And honestly…<br><br>
+<span class="highlight">adhe naaku chala pedda change.</span>
+</div>
 
-    </div>
+<button class="next-btn" onclick="nextPage(4)">
+Next →
+</button>
+
+</div>
 </section>
 
 
 <!-- PAGE 4 -->
+
 <section class="page" id="page4">
-    <div class="card">
 
-        <h1>For Everything… 🤍</h1>
+<div class="card">
 
-        <p>
-            Result vachina roju…
-            nenu select ayyanani telisinappudu…
-        </p>
+<h1>For Everything… 🤍</h1>
 
-        <p>
-            <span class="highlight">
-            Naa family kanna mundu meeku cheppali anipinchindi.</span>
-        </p>
+<p>
+Result vachina roju…
+nenu select ayyanani telisinappudu…
+</p>
 
-        <p>
-            Because somewhere inside me…
-            <span class="highlight">
-            ee success lo mee part undi ani naaku telusu.</span>
-        </p>
+<p>
+<span class="highlight">
+Naa family kanna mundu meeku cheppali anipinchindi.
+</span>
+</p>
 
-        <p>
-            Nenu mee valla chala things nerchukunna.
-        </p>
+<p>
+Because somewhere inside me…
+<span class="highlight">
+ee success lo mee part undi ani naaku telusu.
+</span>
+</p>
 
-        <p>
-            Especially one thing…
-            <br><br>
-            <span class="highlight">
-            Naa reality ni judge cheyyakunda accept cheyyadam.</span>
-        </p>
+<p>
+Nenu mee valla chala things nerchukunna.
+</p>
 
-        <p>
-            Nenu cheppindhi nijamo… abaddhamo…
-            meeku teliyakapovachu.
-            Kaani aa moment lo…
-            <span class="highlight">
-            meeru nannu judge cheyyakunda support chesaru.</span>
-        </p>
+<p>
+Especially one thing…
+<br><br>
+<span class="highlight">
+Naa reality ni judge cheyyakunda accept cheyyadam.
+</span>
+</p>
 
-        <p>
-            Adi chala rare.
-        </p>
+<p>
+Nenu cheppindhi nijamo… abaddhamo…
+meeku teliyakapovachu.
+Kaani aa moment lo…
+<span class="highlight">
+meeru nannu judge cheyyakunda support chesaru.
+</span>
+</p>
 
-        <p>
-            Nenu oka phase lo fail ayyanu.
-            Kaani…
-            <span class="highlight">
-            aa failure naa identity kaadu</span>
-            ani meeru naaku explain chesaru.
-        </p>
+<p>
+Adi chala rare.
+</p>
 
-        <p>
-            Meeru naaku ichina prathi respect…
-            prathi crossing lo ichina support…
-            vatiki simple ga “thank you” cheppalante…
-            words saripovu.
-        </p>
+<p>
+Nenu oka phase lo fail ayyanu.
+Kaani…
+<span class="highlight">
+aa failure naa identity kaadu
+</span>
+ani meeru naaku explain chesaru.
+</p>
 
-        <p>
-            Ippudu nenu happy ga…
-            proud ga…
-            koncham peaceful ga feel avutunna ante…
-            <span class="highlight">andulo mee role undi.</span>
-        </p>
+<p>
+Meeru naaku ichina prathi respect…
+prathi crossing lo ichina support…
+vatiki simple ga “thank you” cheppalante…
+words saripovu.
+</p>
 
-        <p>
-            Naaku chala bayam vesindi…
-            bayata manam ela matladukuntunnamo telisthe,
-            chala mandi different ga teesukuntaremo ani.
-        </p>
+<p>
+Ippudu nenu happy ga…
+proud ga…
+koncham peaceful ga feel avutunna ante…
+<span class="highlight">andulo mee role undi.</span>
+</p>
 
-        <p>
-            “Relation lo unnara enti?”<br>
-            “Enduku ila close ga unnaru?”
-        </p>
+<p>
+Naaku chala bayam vesindi…
+bayata manam ela matladukuntunnamo telisthe,
+chala mandi different ga teesukuntaremo ani.
+</p>
 
-        <p>
-            Ilanti questions vastayemo ani.
-            Meku cheppalanna…
-            <span class="highlight">
-            “meeru em anukuntaro?”</span>
-            ane bayam kuda undedi.
-        </p>
+<p>
+“Relation lo unnara enti?”<br>
+“Enduku ila close ga unnaru?”
+</p>
 
-        <p>
-            Because naa situation ni complete ga explain cheyyadam kuda easy kaadu.
-        </p>
+<p>
+Ilanti questions vastayemo ani.
+Meku cheppalanna…
+<span class="highlight">
+“meeru em anukuntaro?”
+</span>
+ane bayam kuda undedi.
+</p>
 
-        <p>
-            <b>Na reality naaku telusu.</b><br>
-            <b>Na situation naaku telusu.</b><br>
-            <b>And why I connected with you… adi kuda naaku telusu.</b>
-        </p>
+<p>
+Because naa situation ni complete ga explain cheyyadam kuda easy kaadu.
+</p>
 
-        <p class="center">
-            <span class="highlight">Thank you.</span>
-        </p>
+<p>
+<b>Na reality naaku telusu.</b><br>
+<b>Na situation naaku telusu.</b><br>
+<b>And why I connected with you… adi kuda naaku telusu.</b>
+</p>
 
-        <p>
-            For everything.<br>
-            For the respect.<br>
-            For the trust.<br>
-            For the support.<br>
-            For being there when I needed someone.
-        </p>
+<p class="center">
+<span class="highlight">Thank you.</span>
+</p>
 
-        <p>
-            Na mind lo okkate undi…
-        </p>
+<p>
+For everything.<br>
+For the respect.<br>
+For the trust.<br>
+For the support.<br>
+For being there when I needed someone.
+</p>
 
-        <p>
-            Meeru naaku help chesaru.
-            Of course, money pay chesaa.
-            Evaraina help chesthe money return cheyyachu.
-        </p>
+<p>
+Na mind lo okkate undi…
+</p>
 
-        <p>
-            <span class="highlight">But naa situation different.</span>
-        </p>
+<p>
+Meeru naaku help chesaru.
+Of course, money pay chesaa.
+Evaraina help chesthe money return cheyyachu.
+</p>
 
-        <p>
-            Aa time lo naa fate ala undi.
-            And at that moment…
-            meeru help cheyyakapothe things might have been very different.
-        </p>
+<p>
+<span class="highlight">But naa situation different.</span>
+</p>
 
-        <p>
-            Mee past lo jarigina things ni nenu change cheyyalenu.
-        </p>
+<p>
+Aa time lo naa fate ala undi.
+And at that moment…
+meeru help cheyyakapothe things might have been very different.
+</p>
 
-        <p>
-            Kaani…
-        </p>
+<p>
+Mee past lo jarigina things ni nenu change cheyyalenu.
+</p>
 
-        <p>
-            <span class="highlight">
-            future lo meeru eppudaina suffer avuthunte,<br>
-            meeku evaraina support kavalsi vaste,<br>
-            definitely… I will stand there.</span>
-        </p>
+<p>
+Kaani…
+</p>
 
-        <p class="center">
-            That's my promise.
-        </p>
+<p>
+<span class="highlight">
+future lo meeru eppudaina suffer avuthunte,<br>
+meeku evaraina support kavalsi vaste,<br>
+definitely… I will stand there.
+</span>
+</p>
 
-        <p>
-            Not because I owe you something…
-        </p>
+<p class="center">
+That's my promise.
+</p>
 
-        <p class="center">
-            <span class="highlight">
-            but because you once stood there for me.</span>
-        </p>
+<div class="quote">
+Not because I owe you something…<br><br>
+<span class="highlight">
+but because you once stood there for me.
+</span>
+</div>
 
-        <div class="signature">
+<div class="signature">
 
-            <h2>Thank you for being my Santa Claus. 🎅🏻</h2>
+<h2>Thank you for being my Santa Claus. 🎅🏻</h2>
 
-            <br>
+<br>
 
-            <b>FROM,<br>
-            YOUR IRRITATOR 🤍</b>
+<b>
+FROM,<br>
+YOUR IRRITATOR 🤍
+</b>
 
-            <br><br>
+<br><br>
 
-            <b>TO,<br><br>
-            COMRADE.</b>
+<b>
+TO,<br><br>
+COMRADE.
+</b>
 
-        </div>
+</div>
 
-    </div>
+</div>
 </section>
 
 
 <script>
+
 function nextPage(pageNumber) {
 
     document.querySelectorAll(".page").forEach(function(page) {
@@ -459,8 +658,32 @@ function nextPage(pageNumber) {
     document.getElementById("page" + pageNumber)
         .classList.add("active");
 
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
+
+
+function toggleMusic() {
+
+    const music = document.getElementById("bgMusic");
+    const button = document.querySelector(".music-btn");
+
+    if (music.paused) {
+
+        music.play();
+
+        button.innerHTML = "⏸ Pause Music";
+
+    } else {
+
+        music.pause();
+
+        button.innerHTML = "🎵 Play Music";
+    }
+}
+
 </script>
 
 </body>
